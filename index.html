@@ -13,188 +13,92 @@
             --primary-dark: #0e1628;
             --text-main: #333333;
             --text-light: #666666;
-            --border-color: #eeeeee;
             --accent-blue: #0056b3;
             --accent-pink: #e91e63;
         }
 
-        * {
-            box-sizing: border-box;
-            -webkit-print-color-adjust: exact;
-        }
+        * { box-sizing: border-box; -webkit-print-color-adjust: exact; }
 
         body {
             font-family: 'Helvetica', 'Arial', sans-serif;
             background-color: #525659;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin: 0; padding: 0;
+            display: flex; flex-direction: column; align-items: center;
         }
 
+        /* A4 sahifa */
         #cv-page {
-            width: 210mm;
-            min-height: 297mm;
-            background: white;
-            margin: 40px auto;
-            padding: 15mm 20mm;
-            position: relative;
+            width: 210mm; min-height: 297mm;
+            background: white; margin: 40px auto;
+            padding: 20mm; position: relative;
             box-shadow: 0 0 20px rgba(0,0,0,0.4);
         }
 
-        .header-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 50px;
-        }
+        /* Header dizayni */
+        .header-section { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 50px; }
+        .name-box { width: 65%; }
+        .cv-label { font-size: 14pt; color: #777; letter-spacing: 2px; margin-bottom: 10px; font-weight: 300; }
+        .full-name { font-size: 32pt; color: var(--primary-dark); font-weight: bold; text-transform: uppercase; margin: 0; }
 
-        .name-box {
-            width: 65%;
-        }
-
-        .cv-label {
-            font-size: 14pt;
-            color: #777;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            font-weight: 300;
-        }
-
-        .full-name {
-            font-size: 32pt;
-            color: var(--primary-dark);
-            line-height: 1.1;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin: 0;
-        }
-
-        /* Rasm maydoni dizayni */
+        /* Rasm maydoni (Placeholder bilan) */
         .photo-area {
-            width: 160px;
-            height: 210px;
+            width: 160px; height: 210px;
             background-color: var(--primary-dark);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            border: 1px solid #ddd;
-            cursor: pointer;
-            position: relative;
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden; border: 1px solid #ddd;
+            cursor: pointer; position: relative;
         }
 
-        /* Xira yozuvli placeholder */
         .photo-placeholder {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 10pt;
-            text-align: center;
-            padding: 10px;
-            pointer-events: none;
-            position: absolute;
+            color: rgba(255, 255, 255, 0.4); font-size: 9pt;
+            text-align: center; padding: 10px; position: absolute; z-index: 0;
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
-        #profile-img {
-            width: 140px;
-            height: 190px;
-            object-fit: cover;
-            background: #fff;
-            z-index: 1;
-            display: none; /* Rasm yuklanguncha yashirin turadi */
-        }
+        #profile-img { width: 140px; height: 190px; object-fit: cover; background: #fff; z-index: 1; display: none; }
 
-        .personal-info {
-            margin-top: 30px;
-            width: 100%;
-        }
-
-        .info-row {
-            display: flex;
-            margin-bottom: 12px;
-            line-height: 1.4;
-        }
-
-        .label-cell {
-            width: 180px;
-            color: var(--text-light);
-            font-size: 10.5pt;
-            flex-shrink: 0;
-        }
-
-        .value-cell {
-            color: var(--text-main);
-            font-size: 10.5pt;
-            flex-grow: 1;
-            position: relative;
-        }
+        /* Ma'lumotlar jadvali */
+        .info-row { display: flex; margin-bottom: 12px; line-height: 1.4; }
+        .label-cell { width: 180px; color: var(--text-light); font-size: 10.5pt; flex-shrink: 0; }
+        .value-cell { color: var(--text-main); font-size: 10.5pt; flex-grow: 1; position: relative; }
 
         .section-title {
-            font-size: 12pt;
-            font-weight: bold;
-            color: var(--text-main);
-            border-bottom: 1px solid #000;
-            margin: 35px 0 15px 0;
-            padding-bottom: 5px;
-            text-transform: uppercase;
+            font-size: 12pt; font-weight: bold; color: var(--text-main);
+            border-bottom: 1px solid #000; margin: 35px 0 15px 0;
+            padding-bottom: 5px; text-transform: uppercase;
         }
 
-        [contenteditable="true"]:focus {
-            background-color: #f0f7ff;
-            outline: none;
-        }
-
-        .delete-btn {
-            color: #ff4d4d;
-            border: none;
-            background: none;
-            cursor: pointer;
-            font-size: 9pt;
-            margin-left: 10px;
-            display: inline-block;
-        }
-
+        /* Admin panel */
         .admin-panel {
-            position: fixed;
-            bottom: 20px;
+            position: fixed; bottom: 20px;
             background: rgba(255, 255, 255, 0.95);
-            padding: 15px 25px;
-            border-radius: 50px;
+            padding: 15px 25px; border-radius: 50px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            display: flex;
-            gap: 15px;
-            z-index: 9999;
-            border: 1px solid #ddd;
+            display: flex; gap: 15px; z-index: 9999; border: 1px solid #ddd;
         }
 
         .control-btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
+            padding: 10px 22px; border: none; border-radius: 25px;
+            color: white; font-weight: bold; cursor: pointer;
+            display: flex; align-items: center; gap: 8px; font-size: 13px;
+            transition: 0.2s;
         }
 
         .btn-upload { background: #444; }
-        .btn-download { background: var(--accent-pink); }
         .btn-add { background: var(--accent-blue); }
+        .btn-download { background: var(--accent-pink); }
+        .control-btn:active { transform: scale(0.95); }
+
+        .file-link { color: var(--accent-blue); font-style: italic; font-weight: bold; }
+        .delete-btn { color: #ff4d4d; border: none; background: none; cursor: pointer; margin-left: 10px; }
 
         @media screen and (max-width: 210mm) {
-            body { background: #fff; }
             #cv-page { width: 100%; margin: 0; padding: 10mm; box-shadow: none; }
-            .admin-panel { width: 95%; justify-content: center; padding: 10px; bottom: 10px; flex-wrap: wrap; }
+            .admin-panel { width: 95%; justify-content: center; flex-wrap: wrap; bottom: 10px; }
             .label-cell { width: 120px; }
         }
 
-        @media print {
-            .no-print { display: none !important; }
-            #cv-page { margin: 0; box-shadow: none; }
-        }
+        @media print { .no-print { display: none !important; } }
     </style>
 </head>
 <body>
@@ -203,8 +107,8 @@
         <button class="control-btn btn-upload" onclick="document.getElementById('file-input').click()">
             <i class="fas fa-camera"></i> FOTO
         </button>
-        <button class="control-btn btn-add" onclick="addAttachment()">
-            <i class="fas fa-plus"></i> ANHANG
+        <button class="control-btn btn-add" onclick="document.getElementById('anhang-input').click()">
+            <i class="fas fa-paperclip"></i> + ANHANG
         </button>
         <button class="control-btn btn-download" onclick="generatePDF()">
             <i class="fas fa-file-pdf"></i> PDF YUKLASH
@@ -212,34 +116,20 @@
     </div>
 
     <input type="file" id="file-input" style="display:none" accept="image/*" onchange="previewImage(event)">
+    <input type="file" id="anhang-input" style="display:none" accept=".pdf,.doc,.docx" onchange="addFileToList(event)">
 
     <div id="cv-page">
-        
         <div class="header-section">
             <div class="name-box">
                 <div class="cv-label" contenteditable="true">LEBENSLAUF</div>
                 <h1 class="full-name" contenteditable="true">SANJARBEK<br>RAHMIDINOV</h1>
-                
-                <div class="personal-info">
-                    <div class="info-row">
-                        <div class="label-cell">Geburtstag</div>
-                        <div class="value-cell" contenteditable="true">29.08.2003 in Fergana</div>
-                    </div>
-                    <div class="info-row">
-                        <div class="label-cell">Adresse</div>
-                        <div class="value-cell" contenteditable="true">Fergana Stadt, A.Qodiriy Straße 19/56</div>
-                    </div>
-                    <div class="info-row">
-                        <div class="label-cell">Telefon</div>
-                        <div class="value-cell" contenteditable="true">+998958668008</div>
-                    </div>
-                    <div class="info-row">
-                        <div class="label-cell">E-Mail</div>
-                        <div class="value-cell" contenteditable="true">sanjarrahmadinov36@gmail.com</div>
-                    </div>
+                <div style="margin-top:25px">
+                    <div class="info-row"><div class="label-cell">Geburtstag</div><div class="value-cell" contenteditable="true">29.08.2003 in Fergana</div></div>
+                    <div class="info-row"><div class="label-cell">Adresse</div><div class="value-cell" contenteditable="true">Fergana Stadt, A.Qodiriy Straße 19/56</div></div>
+                    <div class="info-row"><div class="label-cell">Telefon</div><div class="value-cell" contenteditable="true">+998958668008</div></div>
+                    <div class="info-row"><div class="label-cell">E-Mail</div><div class="value-cell" contenteditable="true">sanjarrahmadinov36@gmail.com</div></div>
                 </div>
             </div>
-
             <div class="photo-area" onclick="document.getElementById('file-input').click()">
                 <div class="photo-placeholder" id="placeholder-text">FOTO HIER<br>HOCHLADEN</div>
                 <img id="profile-img" src="" alt="Profilfoto">
@@ -251,8 +141,7 @@
             <div class="label-cell" contenteditable="true">09/2019 – 06/2021</div>
             <div class="value-cell">
                 <b contenteditable="true">Akademisches Lyzeum des Polytechnischen Instituts Fergana</b><br>
-                <span contenteditable="true">Schulabschluss</span><br>
-                <span contenteditable="true">Schwerpunkt: Exakte Wissenschaften</span>
+                <span contenteditable="true">Schulabschluss (Exakte Wissenschaften)</span>
             </div>
         </div>
 
@@ -261,33 +150,19 @@
             <div class="label-cell" contenteditable="true">05/2024 – Heute</div>
             <div class="value-cell">
                 <b contenteditable="true">Restaurant "Tyubiteyka"</b><br>
-                <span contenteditable="true">Servicemitarbeiter</span><br>
-                <span contenteditable="true">Herzliche Begrüßung und professionelle Gästebetreuung.</span>
+                <span contenteditable="true">Servicemitarbeiter: Gästebetreuung und Service-Management.</span>
             </div>
         </div>
 
-        <div class="section-title">KENNTNISSE UND INTERESSEN</div>
+        <div class="section-title">KENNTNISSE</div>
         <div class="info-row">
-            <div class="label-cell">Fremdsprachen</div>
-            <div class="value-cell" contenteditable="true">Deutsch (A1/A2), Russisch (Gute K.), Usbekisch (Muttersprache)</div>
-        </div>
-        <div class="info-row">
-            <div class="label-cell">IT-Kenntnisse</div>
-            <div class="value-cell" contenteditable="true">MS-Office: sehr gut</div>
+            <div class="label-cell">Sprachen</div>
+            <div class="value-cell" contenteditable="true">Deutsch (A1/A2), Russisch (Gute Kenntnisse), Usbekisch</div>
         </div>
 
         <div class="section-title">ANHÄNGE</div>
-        <div id="attachments-container">
-            <div class="info-row">
-                <div class="label-cell" contenteditable="true">Zertifikat</div>
-                <div class="value-cell">
-                    <span contenteditable="true">Goethe-Zertifikat A2: Deutsch</span>
-                    <button class="no-print delete-btn" onclick="this.parentElement.parentElement.remove()">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
+        <div id="file-list-container">
             </div>
-        </div>
 
         <div style="margin-top: 50px;">
             <div style="border-bottom: 1px solid #ccc; width: 200px; height: 30px;"></div>
@@ -302,28 +177,30 @@
                 const img = document.getElementById('profile-img');
                 const placeholder = document.getElementById('placeholder-text');
                 img.src = reader.result;
-                img.style.display = 'block'; // Rasmni ko'rsatish
-                placeholder.style.display = 'none'; // Matnni yashirish
+                img.style.display = 'block';
+                placeholder.style.display = 'none';
             }
-            if(event.target.files[0]) {
-                reader.readAsDataURL(event.target.files[0]);
-            }
+            if(event.target.files[0]) reader.readAsDataURL(event.target.files[0]);
         }
 
-        function addAttachment() {
-            const container = document.getElementById('attachments-container');
-            const row = document.createElement('div');
-            row.className = 'info-row';
-            row.innerHTML = `
-                <div class="label-cell" contenteditable="true">Anhang</div>
-                <div class="value-cell">
-                    <span contenteditable="true">Hujjat nomi...</span>
-                    <button class="no-print delete-btn" onclick="this.parentElement.parentElement.remove()">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-            `;
-            container.appendChild(row);
+        function addFileToList(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const container = document.getElementById('file-list-container');
+                const row = document.createElement('div');
+                row.className = 'info-row';
+                row.innerHTML = `
+                    <div class="label-cell" contenteditable="true">Dokument</div>
+                    <div class="value-cell">
+                        <span class="file-link"><i class="fas fa-file-alt"></i> ${file.name}</span>
+                        <button class="no-print delete-btn" onclick="this.parentElement.parentElement.remove()">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(row);
+                event.target.value = ''; // Reset
+            }
         }
 
         async function generatePDF() {
@@ -335,25 +212,20 @@
                 margin: 0,
                 filename: 'Lebenslauf_Sanjarbek.pdf',
                 image: { type: 'jpeg', quality: 1.0 },
-                html2canvas: { scale: 3, useCORS: true },
+                html2canvas: { scale: 3, useCORS: true, letterRendering: true },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
             try {
                 const pdf = await html2pdf().set(opt).from(element).outputPdf('blob');
                 const url = URL.createObjectURL(pdf);
+                window.open(url, '_blank');
                 const a = document.createElement('a');
-                a.href = url;
-                a.download = 'Lebenslauf_Sanjarbek.pdf';
-                a.click();
-                setTimeout(() => window.open(url, '_blank'), 500);
-            } catch (err) {
-                alert("Xato: " + err);
-            } finally {
-                btn.innerHTML = '<i class="fas fa-file-pdf"></i> PDF YUKLASH';
-            }
+                a.href = url; a.download = 'Lebenslauf_Sanjarbek.pdf'; a.click();
+            } catch (err) { alert("Xato: " + err); } 
+            finally { btn.innerHTML = '<i class="fas fa-file-pdf"></i> PDF YUKLASH'; }
         }
     </script>
 </body>
-                </html>
-                
+    </html>
+    
