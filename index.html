@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DE-Hujjat AI | Professional Lebenslauf</title>
+    <title>DE-Hujjat AI | Lebenslauf</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
-            --primary-color: #1a2a6c;
-            --secondary-color: #f4f4f9;
-            --accent-color: #e91e63;
+            --primary: #1a2a6c;
+            --white: #ffffff;
+            --gray: #f4f4f9;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #333;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: #444;
             margin: 0;
             padding: 0;
             display: flex;
@@ -24,52 +24,51 @@
             align-items: center;
         }
 
-        /* Sahifa sozlamalari */
+        /* Mobil qurilmalar uchun ekran moslashuvi */
         #resume-container {
-            width: 210mm;
-            min-height: 297mm;
+            width: 95%; /* Telefondagi kenglik */
+            max-width: 210mm; /* Kompyuterda A4 kengligi */
             background: white;
-            margin: 20px 0;
-            padding: 0;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            margin: 10px auto;
             display: flex;
-            position: relative;
+            flex-wrap: wrap; /* Sig'magan joyni pastga tushiradi */
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            min-height: 297mm;
         }
 
         /* Chap panel */
         .sidebar {
-            width: 35%;
-            background-color: var(--primary-color);
+            width: 100%; /* Mobil telefonda to'liq kenglik */
+            background-color: var(--primary);
             color: white;
-            padding: 30px 20px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Kompyuterda chap panel kengligini o'zgartirish */
+        @media (min-width: 768px) {
+            .sidebar { width: 35%; }
+            .main-content { width: 65%; }
+            #resume-container { width: 210mm; flex-wrap: nowrap; }
         }
 
         .profile-img-container {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             border: 3px solid white;
-            margin: 0 auto 20px;
+            margin: 0 auto 15px;
             border-radius: 50%;
             overflow: hidden;
             background: #ddd;
             cursor: pointer;
-            position: relative;
         }
 
-        #profile-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .sidebar-section {
-            margin-bottom: 30px;
-        }
+        #profile-img { width: 100%; height: 100%; object-fit: cover; }
 
         .sidebar-title {
             border-bottom: 1px solid rgba(255,255,255,0.3);
             padding-bottom: 5px;
-            margin-bottom: 15px;
+            margin: 15px 0 10px;
             text-transform: uppercase;
             font-weight: bold;
             font-size: 14px;
@@ -77,40 +76,33 @@
 
         /* O'ng panel */
         .main-content {
-            width: 65%;
-            padding: 40px;
-            color: #333;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            background: white;
         }
 
         .header-info h1 {
             margin: 0;
-            font-size: 32px;
-            color: var(--primary-color);
+            font-size: 24px;
+            color: var(--primary);
             text-transform: uppercase;
-        }
-
-        .main-section {
-            margin-bottom: 25px;
         }
 
         .main-title {
             display: flex;
             align-items: center;
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--primary-color);
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
             padding-bottom: 5px;
-            margin-bottom: 15px;
-            font-size: 18px;
+            margin: 20px 0 10px;
+            font-size: 16px;
             text-transform: uppercase;
         }
 
         .main-title i { margin-right: 10px; }
 
-        .entry { margin-bottom: 15px; }
-        .entry-title { font-weight: bold; display: flex; justify-content: space-between; }
-        .entry-subtitle { color: #666; font-style: italic; }
-
-        /* Tahrirlash effekti */
+        /* Tahrirlash */
         [contenteditable="true"] {
             outline: none;
             padding: 2px;
@@ -119,41 +111,42 @@
 
         [contenteditable="true"]:hover {
             background: rgba(26, 42, 108, 0.05);
-            box-shadow: 0 0 0 1px #ccc;
         }
 
-        /* Tugmalar */
+        /* Tugmalar paneli */
         .controls {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.8);
+            padding: 10px;
             display: flex;
-            flex-direction: column;
-            gap: 10px;
+            justify-content: space-around;
             z-index: 1000;
         }
 
         .btn {
-            padding: 12px 25px;
+            padding: 10px 15px;
             border: none;
-            border-radius: 50px;
+            border-radius: 5px;
             color: white;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            font-size: 12px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
+            gap: 5px;
         }
 
         .btn-download { background: #e91e63; }
         .btn-image { background: #4caf50; }
 
+        /* PDF uchun maxsus sozlama */
         @media print {
-            .controls { display: none; }
-            body { background: white; padding: 0; }
-            #resume-container { margin: 0; box-shadow: none; }
+            .sidebar { width: 35% !important; float: left; height: 297mm; }
+            .main-content { width: 65% !important; float: left; }
+            #resume-container { width: 210mm !important; display: block; }
         }
     </style>
 </head>
@@ -161,10 +154,10 @@
 
     <div class="controls">
         <button class="btn btn-image" onclick="document.getElementById('file-input').click()">
-            <i class="fas fa-camera"></i> FOTO YUKLASH
+            <i class="fas fa-camera"></i> FOTO
         </button>
         <button class="btn btn-download" onclick="exportPDF()">
-            <i class="fas fa-file-pdf"></i> PDF YUKLAB OLISH
+            <i class="fas fa-file-pdf"></i> PDF YUKLASH
         </button>
     </div>
 
@@ -176,32 +169,25 @@
                 <img id="profile-img" src="https://via.placeholder.com/150" alt="Profil">
             </div>
 
-            <div class="sidebar-section">
-                <div class="sidebar-title">Kontakt</div>
-                <p contenteditable="true"><i class="fas fa-phone"></i> +998 90 123 45 67</p>
-                <p contenteditable="true"><i class="fas fa-envelope"></i> sanjar@mail.com</p>
-                <p contenteditable="true"><i class="fas fa-location-dot"></i> Fergana, UZ</p>
-            </div>
+            <div class="sidebar-title">Kontakt</div>
+            <p contenteditable="true"><i class="fas fa-phone"></i> +998 90 123 45 67</p>
+            <p contenteditable="true"><i class="fas fa-envelope"></i> sanjar@mail.com</p>
+            <p contenteditable="true"><i class="fas fa-location-dot"></i> Fergana, UZ</p>
 
-            <div class="sidebar-section">
-                <div class="sidebar-title">Sprachen</div>
-                <p contenteditable="true">Usbekisch - Muttersprache</p>
-                <p contenteditable="true">Deutsch - A2 Level</p>
-                <p contenteditable="true">Russisch - Fließend</p>
-            </div>
+            <div class="sidebar-title">Sprachen</div>
+            <p contenteditable="true">Usbekisch (Muttersprache)</p>
+            <p contenteditable="true">Deutsch (A2 Level)</p>
+            <p contenteditable="true">Russisch (Fließend)</p>
 
-            <div class="sidebar-section">
-                <div class="sidebar-title">Expertise</div>
-                <p contenteditable="true">Gastronomie</p>
-                <p contenteditable="true">Kundenservice</p>
-                <p contenteditable="true">Teamarbeit</p>
-            </div>
+            <div class="sidebar-title">Expertise</div>
+            <p contenteditable="true">• Gastronomie</p>
+            <p contenteditable="true">• Kundenservice</p>
         </div>
 
         <div class="main-content">
             <div class="header-info">
                 <h1 contenteditable="true">Sanjarbek Rahmidinov</h1>
-                <p contenteditable="true" style="font-size: 18px; color: #666;">Hotelfachmann</p>
+                <p contenteditable="true" style="color: #666; font-weight: bold;">Hotelfachmann</p>
             </div>
 
             <div class="main-section">
@@ -211,73 +197,50 @@
 
             <div class="main-section">
                 <div class="main-title"><i class="fas fa-briefcase"></i> Berufserfahrung</div>
-                <div class="entry">
-                    <div class="entry-title">
-                        <span contenteditable="true">Kellner</span>
-                        <span contenteditable="true">2024 - Heute</span>
-                    </div>
-                    <div class="entry-subtitle" contenteditable="true">Restaurant Tyubiteyka, Tashkent</div>
-                    <p contenteditable="true">• Gästebetreuung und Service<br>• Ordnung im Restaurantbereich</p>
-                </div>
+                <p contenteditable="true"><b>Kellner (2024 - Heute)</b><br>Restaurant Tyubiteyka, Tashkent<br>• Gästebetreuung und Service</p>
             </div>
 
             <div class="main-section">
                 <div class="main-title"><i class="fas fa-graduation-cap"></i> Ausbildung</div>
-                <div class="entry">
-                    <div class="entry-title">
-                        <span contenteditable="true">Tourismus & Management</span>
-                        <span contenteditable="true">2021 - 2024</span>
-                    </div>
-                    <div class="entry-subtitle" contenteditable="true">Universität Fergana</div>
-                </div>
+                <p contenteditable="true"><b>Tourismus Management (2021-2024)</b><br>Universität Fergana</p>
             </div>
 
             <div class="main-section">
                 <div class="main-title"><i class="fas fa-heart"></i> Hobbys</div>
-                <p contenteditable="true">Fußball spielen, Programmieren, Reisen, Deutsch lernen.</p>
+                <p contenteditable="true">Fußball, Programmieren, Deutsch lernen.</p>
             </div>
         </div>
     </div>
 
     <script>
-        // Rasm yuklash funksiyasi
         function loadPhoto(event) {
             const reader = new FileReader();
-            reader.onload = function() {
-                const output = document.getElementById('profile-img');
-                output.src = reader.result;
-            }
-            reader.onerror = function() {
-                alert("Rasmni yuklashda xatolik yuz berdi!");
+            reader.onload = function(){
+                document.getElementById('profile-img').src = reader.result;
             }
             reader.readAsDataURL(event.target.files[0]);
         }
 
-        // PDF eksport funksiyasi (Telegram Mini App uchun optimallashgan)
         function exportPDF() {
             const element = document.getElementById('resume-container');
+            
+            // PDF yuklashda ekran kengligini vaqtincha A4 ga moslaymiz
             const opt = {
                 margin: 0,
-                filename: 'Lebenslauf_Sanjarbek.pdf',
-                image: { type: 'jpeg', quality: 1 },
-                html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+                filename: 'Lebenslauf.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
-            // Telegramda ochish uchun BlobURL ishlatamiz
             html2pdf().set(opt).from(element).toPdf().output('bloburl').then(function(pdfUrl) {
                 const link = document.createElement('a');
                 link.href = pdfUrl;
-                link.download = 'Lebenslauf.pdf';
-                link.target = '_blank';
-                document.body.appendChild(link);
+                link.download = 'Lebenslauf_Sanjarbek.pdf';
                 link.click();
-                document.body.removeChild(link);
-            }).catch(err => {
-                alert("PDF yaratishda xatolik: " + err);
             });
         }
     </script>
 </body>
-    </html>
-                    
+                </html>
+                
