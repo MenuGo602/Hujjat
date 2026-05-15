@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DE-Hujjat AI | Professional Lebenslauf</title>
+    <!-- html2pdf kutubxonasi -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #1a2a6c;
+            --accent-color: #e91e63;
+        }
+        body {
+            background: #f0f2f5;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        /* A4 formatdagi qog'oz stili */
+        .resume-paper {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            padding: 20mm;
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+            position: relative;
+            box-sizing: border-box;
+            color: #333;
+        }
+        /* Tep qism (Header) */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .name-area {
+            flex: 1;
+        }
+        .name-area h1 {
+            margin: 0;
+            font-size: 32px;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .name-area p {
+            margin: 5px 0 0 0;
+            font-weight: bold;
+            color: #666;
+            font-size: 18px;
+        }
+        /* Rasm maydoni */
+        .photo-container {
+            width: 35mm;
+            height: 45mm;
+            border: 2px dashed #ddd;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: #fafafa;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+        }
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        .photo-placeholder {
+            font-size: 10px;
+            color: #888;
+            padding: 5px;
+        }
+        /* Bo'limlar */
+        .section-title {
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
+            margin: 25px 0 15px 0;
+            border-radius: 2px;
+        }
+        .info-row {
+            display: flex;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        .label-col {
+            width: 30%;
+            font-weight: bold;
+            color: #555;
+            font-size: 14px;
+        }
+        .value-col {
+            width: 70%;
+            font-size: 14px;
+        }
+        /* Tahrirlash effekti */
+        [contenteditable="true"] {
+            padding: 2px 5px;
+            border-radius: 3px;
+            transition: background 0.3s;
+        }
+        [contenteditable="true"]:hover {
+            background: #fffde7;
+            outline: 1px solid #ffd54f;
+        }
+        [contenteditable="true"]:focus {
+            background: #fffde7;
+            outline: 2px solid var(--accent-color);
+        }
+        /* Yuklab olish tugmasi */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+            transition: transform 0.2s;
+            z-index: 1000;
+        }
+        .fab:active {
+            transform: scale(0.95);
+        }
+        /* Mobil uchun moslashuv */
+        @media screen and (max-width: 220mm) {
+            body { padding: 0; }
+            .resume-paper { width: 100%; height: auto; box-shadow: none; padding: 15px; }
+            .fab { bottom: 20px; right: 20px; padding: 12px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="resume-paper" id="resume-container">
+    <!-- Header -->
+    <div class="header">
+        <div class="name-area">
+            <h1 contenteditable="true">SANJARBEK RAHMIDINOV</h1>
+            <p contenteditable="true">LEBENSLAUF</p>
+        </div>
+        <div class="photo-container" onclick="document.getElementById('imageInput').click()">
+            <div class="photo-placeholder" id="placeholder-text">
+                <b>+ FOTO</b><br>BOSING VA RASM YUKLANG
+            </div>
+            <img id="preview-image" src="" alt="Profil rasm">
+        </div>
+        <input type="file" id="imageInput" style="display:none" accept="image/*" onchange="previewFile()">
+    </div>
+
+    <!-- Shaxsiy ma'lumotlar -->
+    <div class="section-title">Persönliche Daten</div>
+    <div class="info-row">
+        <div class="label-col">Geburtsdatum:</div>
+        <div class="value-col" contenteditable="true">29.08.2003 in Fergana</div>
+    </div>
+    <div class="info-row">
+        <div class="label-col">Adresse:</div>
+        <div class="value-col" contenteditable="true">Fergana Stadt, A.Qodiriy Straße 19/56</div>
+    </div>
+    <div class="info-row">
+        <div class="label-col">Telefon:</div>
+        <div class="value-col" contenteditable="true">+998958668008</div>
+    </div>
+    <div class="info-row">
+        <div class="label-col">E-Mail:</div>
+        <div class="value-col" contenteditable="true">sanjarrahmidinov36@gmail.com</div>
+    </div>
+
+    <!-- Ish tajribasi -->
+    <div class="section-title">Berufserfahrung</div>
+    <div class="info-row">
+        <div class="label-col" contenteditable="true">05/2024 – Heute</div>
+        <div class="value-col">
+            <b contenteditable="true">Restaurant "Tyubiteyka"</b><br>
+            <span contenteditable="true" style="font-style: italic; color: #666;">Servicemitarbeiter</span>
+            <ul contenteditable="true" style="margin: 5px 0; padding-left: 20px;">
+                <li>Herzliche Begrüßung va Betreuung der Gäste</li>
+                <li>Aufnahme von Bestellungen und Servieren von Speisen</li>
+                <li>Sicherstellung der Sauberkeit und Hygiene im Gastraum</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Ta'lim -->
+    <div class="section-title">Ausbildung</div>
+    <div class="info-row">
+        <div class="label-col" contenteditable="true">09/2019 – 06/2021</div>
+        <div class="value-col">
+            <b contenteditable="true">Akademisches Lyzeum des Polytechnischen Instituts Fergana</b><br>
+            <span contenteditable="true">Schulabschluss (Abitur)</span><br>
+            <span contenteditable="true" style="font-size: 12px;">Schwerpunkt: Exakte Wissenschaften</span>
+        </div>
+    </div>
+
+    <!-- Tillar -->
+    <div class="section-title">Sprachkenntnisse</div>
+    <div class="info-row">
+        <div class="value-col" style="width: 100%;" contenteditable="true">
+            <b>Usbekisch:</b> Muttersprache | <b>Tadschikisch:</b> Muttersprache | <b>Russisch:</b> Gute Kenntnisse | <b>Deutsch:</b> Grundkenntnisse (A1/A2)
+        </div>
+    </div>
+
+    <!-- Qiziqishlar -->
+    <div class="section-title">Hobbys</div>
+    <div class="info-row">
+        <div class="value-col" style="width: 100%;" contenteditable="true">
+            Fußball spielen, Musik hören, Kochen, Programmierung (Python)
+        </div>
+    </div>
+</div>
+
+<button class="fab" onclick="downloadPDF()">PDF YUKLAB OLISH</button>
+
+<script>
+    // Rasm yuklash funksiyasi
+    function previewFile() {
+        const preview = document.getElementById('preview-image');
+        const file = document.getElementById('imageInput').files[0];
+        const placeholder = document.getElementById('placeholder-text');
+        const reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+            preview.style.display = 'block';
+            placeholder.style.display = 'none';
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // PDF yaratish funksiyasi
+    function downloadPDF() {
+        const element = document.getElementById('resume-container');
+        const opt = {
+            margin: 0,
+            filename: 'Lebenslauf_Sanjarbek.pdf',
+            image: { type: 'jpeg', quality: 1 },
+            html2canvas: { scale: 3, useCORS: true, letterRendering: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        // Yuklash vaqtida tugmani vaqtincha yashirish
+        html2pdf().set(opt).from(element).save();
+    }
+</script>
+
+</body>
+</html>
